@@ -1,26 +1,57 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CarCard from "../components/CarCard";
+import CarModal from "../components/CarModal";
+import OrderModal from "../components/OrderModal";
 
 const Home = () => {
   const [cars, setCars] = useState([]);
+  const [selectedCar, setSelectedCar] = useState(null);
+  const [showOrder, setShowOrder] = useState(false);
 
   useEffect(() => {
-    axios.get("https://diyorbekbaxshullayev.pythonanywhere.com/api/cars/")
-      .then(res => setCars(res.data))
-      .catch(err => console.error(err));
+    axios
+      .get("https://diyorbekbaxshullayev.pythonanywhere.com/api/cars/")
+      .then((res) => setCars(res.data))
+      .catch((err) => console.error(err));
   }, []);
+
+  const handleOrderSubmit = (formData) => {
+    console.log("Buyurtma yuborildi:", formData);
+    setShowOrder(false);
+    setSelectedCar(null);
+  };
 
   return (
     <div className="p-4 max-w-screen-xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">🚗 Rent a Car</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center"> Rent a Car</h1>
 
-      {/* Responsive grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Car list */}
+      <div className="flex flex-col gap-4">
         {cars.map((car) => (
-          <CarCard key={car.id} car={car} onClick={() => {}} />
+          <CarCard key={car.id} car={car} onClick={() => setSelectedCar(car)} />
         ))}
       </div>
+
+      {/* Car Modal */}
+      {selectedCar && (
+        <CarModal
+          car={selectedCar}
+          onClose={() => setSelectedCar(null)}
+          onOrder={() => {
+            setShowOrder(true);
+          }}
+        />
+      )}
+
+      {/* Order Modal */}
+      {showOrder && selectedCar && (
+        <OrderModal
+          carId={selectedCar.id}
+          onClose={() => setShowOrder(false)}
+          onSubmit={handleOrderSubmit}
+        />
+      )}
     </div>
   );
 };
