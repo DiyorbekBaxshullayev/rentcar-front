@@ -25,7 +25,7 @@ const CarCard = ({ car, onClick }) => {
         <div className="flex justify-between items-center mt-4">
           <div className="flex flex-col">
             <span className="text-xs text-gray-500">Kunlik narx</span>
-            <span className="text-green-600 font-bold text-lg">${car.daily_price}</span>
+            <span className="text-green-600 font-bold text-lg">{car.daily_price} so'm</span>
           </div>
 
           <button
