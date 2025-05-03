@@ -6,7 +6,7 @@ const CarModal = ({ car, onClose, onOrder }) => {
         <h2 className="text-xl font-bold mt-2">{car.name}</h2>
         <p>{car.brand} - {car.year}</p>
         <p className="mt-2">{car.description}</p> {/* Batafsil ma'lumot */}
-        <p className="text-green-600 font-bold mt-2">Kunlik narx: {Number(car.daily_price).toLocaleString()} so'm</p>
+        <p className="text-green-600 font-bold mt-2">Kunlik narx: {parseInt(car.daily_price).toLocaleString("uz-UZ")} so'm</p>
         <div className="flex justify-between mt-4">
           <button className="bg-gray-300 px-4 py-2 rounded" onClick={onClose}>Yopish</button>
           <button className="bg-blue-600 text-white px-4 py-2 rounded" onClick={onOrder}>Buyurtma</button>
