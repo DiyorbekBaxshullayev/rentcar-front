@@ -20,7 +20,7 @@ const OrderModal = ({ carId, onClose }) => {
       onClose(); // Modalni yopish
     } catch (error) {
       console.error(error);
-      alert("Buyurtma yuborishda xatolik yuz berdi.");
+      alert("Buyurtma yuborishda xatolik yuz berdi.");            
     }
   };
 
